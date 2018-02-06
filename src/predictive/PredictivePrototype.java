@@ -1,3 +1,6 @@
+/**
+ * @author YU-NING,CHANG
+ */
 package predictive;
 
 import java.io.FileReader;
@@ -8,17 +11,35 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class PredictivePrototype {
-
-	// public static final char[] alphabet =
-	// new char[] {'a','b','c','d','e','f','g','h','i','j','k','l',
-	// 'm','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-	// helper function
+	
+	
+	/**
+	 * helper function
+	 * @param word- String for any format
+	 * @return boolean- true if the given string is alphabet no matter upper case or lower case
+	 * 					false if the given string is not an alphabet
+	 */
 	public static boolean isValidWord(String word) {
 		return word.matches("[a-zA-Z]*");
 	}
 
+	/**
+	 * @param word- String for any format
+	 * @return StringBuffer- turn the given string into corresponding number as below:
+	 * ----------------------
+	 * 1      2(abc)  3(def)
+	 * ----------------------
+	 * 4(ghi) 5(jkl)  6(mno)
+	 * ----------------------
+	 * 7(pqr) 8(tuv)  9(wxyz)
+	 * ----------------------
+	 * *		  space   #			
+	 * 
+	 * We use "StringBuffer" instead of "String" because it allows us to add strings directly 
+	 * by calling append method so that the computer is able to reduce the cost of memory
+	 * when looping. 
+	 */
 	public static StringBuffer wordToSignature(String word) {
-
 		ArrayList<String> resultArr = new ArrayList<>();
 		StringBuffer result = new StringBuffer();
 		String wordToLowerCase = word.toLowerCase();
@@ -72,13 +93,19 @@ public class PredictivePrototype {
 		return result;
 
 	}
-
+	/**
+	 * The scanenr will read the file every time when this method is given the signatures
+	 * and it costs O(n) in worse case for each search so it may not so efficient.
+	 * @param  signature- String for any format (ususally we put numeric string)
+	 * @return Set<String>- A set contains the possible strings based on given signature.
+	 */
 	public static Set<String> signatureToWords(String signature) {
-
+		
 		Set<String> possibleResult = new HashSet<>();
 		
 		try {
-			FileReader reader = new FileReader("words");
+			FileReader reader = new FileReader("/usr/share/dict/words");
+			// FileReader reader = new FileReader("/Users/rickchang/eclipse-workspace/WS2-3/words");
 			Scanner scanner = new Scanner(reader);
 			String content;
 			while (scanner.hasNextLine()) {
@@ -94,11 +121,8 @@ public class PredictivePrototype {
 		return possibleResult;
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println(wordToSignature(""));
-		System.out.println("" + isValidWord("aaaaa"));
-		System.out.println("" + signatureToWords(""));
-	}
+//	public static void main(String[] args) {
+//		System.out.println(""+signatureToWords("9667"));
+//	}
 
 }

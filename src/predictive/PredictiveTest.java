@@ -1,6 +1,8 @@
+/**
+ * test the PredictivePrototype class
+ * @author YU-NING,CHANG
+ */
 package predictive;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashSet;
@@ -11,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 
 
-class PredictivePrototypeTest {
+class PredictiveTest {
 
 	@Rule
 	public final ExpectedException exception = ExpectedException.none();
@@ -29,7 +31,7 @@ class PredictivePrototypeTest {
 	
 	}
 	
-	// test for wordToSignature method
+	// test for wordToSignature method in PredictivePrototype class
 	@Test
 	public void Test2() {
 	// all lowercase alphebat
@@ -43,7 +45,7 @@ class PredictivePrototypeTest {
 	PredictivePrototype.wordToSignature("").toString();
 	}
 	
-	// test for signatureToWords method
+	// test for signatureToWords method in PredictivePrototype class
 	@Test
     public void Test3() {
 	// empty
@@ -53,5 +55,17 @@ class PredictivePrototypeTest {
 	Set<String> expected2=new HashSet<>();
 	assertEquals(expected2,PredictivePrototype.signatureToWords("asdfasf"));
 	}
-
+	
+	
+	// test for signatureToWords method in ListDictionary class
+	@Test
+    public void Test4() {
+	ListDictionary test =new ListDictionary();
+	// empty
+	Set<String> expected1=new HashSet<>();
+	assertEquals(expected1,test.signatureToWords(""));
+	// with non-numeric 
+	Set<String> expected2=new HashSet<>();
+	assertEquals(expected2,test.signatureToWords("asdfasf"));
+	}
 }
